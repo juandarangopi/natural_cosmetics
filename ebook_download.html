@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Download Your Ebook — Natural Cosmetic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: oklch(97% 0.008 30);
+    --blush: oklch(92% 0.022 15);
+    --rose: oklch(33% 0.08 155);
+    --rose-mid: oklch(48% 0.08 155);
+    --rose-light: oklch(68% 0.07 150);
+    --gold: oklch(68% 0.12 58);
+    --gold-light: oklch(88% 0.07 58);
+    --warm-dark: oklch(18% 0.02 50);
+    --warm-mid: oklch(42% 0.02 50);
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--cream);
+    color: var(--warm-dark);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  nav {
+    background: oklch(97% 0.008 60 / 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid oklch(88% 0.02 30);
+    padding: 14px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 22px; font-weight: 600;
+    color: var(--rose); letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+  .nav-support {
+    font-size: 13px; color: var(--warm-mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-support:hover { color: var(--rose); }
+
+  main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 24px;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 680px;
+    text-align: center;
+  }
+
+  /* ── States ── */
+  .state { display: none; }
+  .state.active { display: block; }
+
+  /* ── Loading ── */
+  .spinner-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 80px 0;
+  }
+  .spinner {
+    width: 52px; height: 52px;
+    border: 3px solid oklch(88% 0.02 30);
+    border-top-color: var(--rose);
+    border-radius: 50%;
+    animation: spin 0.9s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .spinner-label {
+    font-family: var(--font-display);
+    font-size: 22px; font-weight: 400;
+    font-style: italic; color: var(--warm-mid);
+  }
+
+  /* ── Success ── */
+  .success-icon {
+    width: 80px; height: 80px;
+    background: var(--rose);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 28px;
+    box-shadow: 0 12px 40px oklch(33% 0.08 155 / 0.25);
+  }
+  .success-icon svg { width: 36px; height: 36px; }
+
+  .greeting {
+    font-size: 13px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 12px;
+  }
+  .success-title {
+    font-family: var(--font-display);
+    font-size: clamp(34px, 5vw, 56px);
+    font-weight: 400; line-height: 1.1;
+    color: var(--warm-dark); margin-bottom: 10px;
+  }
+  .success-title em { font-style: italic; color: var(--rose); }
+  .success-sub {
+    font-size: 16px; color: var(--warm-mid);
+    margin-bottom: 40px; line-height: 1.7;
+  }
+
+  .ebook-mockup-wrap {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 40px;
+  }
+  .ebook-mockup {
+    width: 200px; height: 270px;
+    background: linear-gradient(145deg, oklch(92% 0.025 15), oklch(86% 0.04 20));
+    border-radius: 4px 8px 8px 4px;
+    box-shadow:
+      -4px 0 0 0 oklch(75% 0.04 20),
+      0 20px 60px oklch(44% 0.13 10 / 0.2),
+      0 4px 12px oklch(44% 0.13 10 / 0.1);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 10px; overflow: hidden; position: relative;
+    margin: 0 auto;
+  }
+  .ebook-mockup::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      45deg, transparent, transparent 18px,
+      oklch(80% 0.04 15 / 0.12) 18px,
+      oklch(80% 0.04 15 / 0.12) 19px
+    );
+  }
+  .ebook-mockup.has-cover::before { display: none; }
+  .ebook-mockup.has-cover img {
+    width: 100%; height: 100%;
+    object-fit: cover; border-radius: 4px 8px 8px 4px;
+    display: block;
+  }
+  .mockup-icon { font-size: 40px; z-index: 1; opacity: 0.55; }
+  .mockup-product-name {
+    font-family: var(--font-display);
+    font-size: 14px; font-weight: 600;
+    color: var(--rose); z-index: 1;
+    text-align: center; padding: 0 16px;
+    line-height: 1.3;
+  }
+  .ebook-badge {
+    position: absolute;
+    top: -12px; right: -12px;
+    width: 64px; height: 64px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    box-shadow: 0 6px 20px oklch(72% 0.10 55 / 0.4);
+  }
+  .ebook-badge-icon { font-size: 22px; }
+  .ebook-badge-label {
+    font-size: 8px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: white;
+    font-weight: 700; margin-top: 2px;
+  }
+
+  .btn-download {
+    display: inline-flex;
+    align-items: center; justify-content: center;
+    gap: 12px;
+    background: var(--rose); color: white; border: none;
+    padding: 20px 48px; border-radius: 4px;
+    font-family: var(--font-body); font-size: 15px; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    cursor: pointer; transition: all 0.2s;
+    text-decoration: none;
+    width: 100%; max-width: 400px;
+    margin-bottom: 14px;
+  }
+  .btn-download:hover {
+    background: oklch(38% 0.16 10);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 36px oklch(44% 0.13 10 / 0.28);
+  }
+  .btn-download:disabled {
+    opacity: 0.6; cursor: not-allowed; transform: none;
+    box-shadow: none;
+  }
+  .btn-download svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+  .download-note {
+    font-size: 12px; color: var(--warm-mid);
+    display: flex; align-items: center; justify-content: center;
+    gap: 6px; margin-top: 4px;
+  }
+  .download-note svg { width: 12px; height: 14px; }
+
+  .perks-row {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px solid oklch(88% 0.02 30);
+    flex-wrap: wrap;
+  }
+  .perk {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; color: var(--warm-mid);
+  }
+  .perk-dot {
+    width: 20px; height: 20px;
+    background: var(--gold-light); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; color: var(--warm-dark); font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  /* ── Error ── */
+  .error-icon {
+    width: 80px; height: 80px;
+    background: oklch(92% 0.025 15);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 28px;
+    border: 2px solid oklch(82% 0.04 20);
+  }
+  .error-icon svg { width: 36px; height: 36px; }
+
+  .error-title {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 400; line-height: 1.15;
+    color: var(--warm-dark); margin-bottom: 12px;
+  }
+  .error-title em { font-style: italic; color: var(--rose); }
+  .error-body {
+    font-size: 16px; color: var(--warm-mid);
+    line-height: 1.75; margin-bottom: 32px;
+    max-width: 500px; margin-left: auto; margin-right: auto;
+  }
+
+  /* ── Form ── */
+  .form-icon {
+    width: 80px; height: 80px;
+    background: var(--gold-light);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 28px;
+  }
+  .form-icon svg { width: 36px; height: 36px; }
+
+  .form-title {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 400; line-height: 1.15;
+    color: var(--warm-dark); margin-bottom: 10px;
+  }
+  .form-title em { font-style: italic; color: var(--rose); }
+  .form-sub {
+    font-size: 15px; color: var(--warm-mid);
+    margin-bottom: 36px; line-height: 1.7;
+  }
+
+  .license-input-wrap {
+    display: flex; gap: 10px;
+    max-width: 480px; margin: 0 auto 12px;
+  }
+  .license-input {
+    flex: 1;
+    padding: 14px 18px;
+    border: 1.5px solid oklch(85% 0.02 30);
+    border-radius: 4px;
+    font-family: var(--font-body); font-size: 14px;
+    color: var(--warm-dark);
+    background: white;
+    transition: border-color 0.2s;
+    letter-spacing: 0.04em;
+  }
+  .license-input:focus {
+    outline: none;
+    border-color: var(--rose);
+    box-shadow: 0 0 0 3px oklch(33% 0.08 155 / 0.08);
+  }
+  .license-input::placeholder { color: oklch(68% 0.02 30); }
+
+  .btn-verify {
+    background: var(--rose); color: white; border: none;
+    padding: 14px 24px; border-radius: 4px;
+    font-family: var(--font-body); font-size: 14px; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    cursor: pointer; transition: all 0.2s; white-space: nowrap;
+  }
+  .btn-verify:hover { background: var(--rose-mid); }
+  .btn-verify:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  .form-hint {
+    font-size: 12px; color: var(--warm-mid);
+    max-width: 480px; margin: 0 auto;
+  }
+  .form-error {
+    background: oklch(95% 0.02 20);
+    border: 1px solid oklch(70% 0.08 10);
+    border-radius: 4px; padding: 12px 16px;
+    font-size: 13px; color: var(--rose);
+    margin: 12px auto 0; max-width: 480px;
+    display: none; text-align: left;
+  }
+  .form-error.visible { display: block; }
+
+  .divider {
+    display: flex; align-items: center; gap: 16px;
+    max-width: 480px; margin: 28px auto;
+    color: oklch(72% 0.02 30); font-size: 12px; letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: oklch(88% 0.02 30);
+  }
+
+  .btn-secondary-sm {
+    display: inline-block;
+    background: transparent; color: var(--rose);
+    border: 1.5px solid var(--rose);
+    padding: 13px 28px; border-radius: 4px;
+    font-family: var(--font-body); font-size: 14px; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    cursor: pointer; transition: all 0.2s;
+    text-decoration: none;
+  }
+  .btn-secondary-sm:hover { background: var(--blush); }
+
+  footer {
+    background: oklch(12% 0.02 30);
+    color: oklch(65% 0.02 30);
+    text-align: center;
+    padding: 24px 32px;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+  footer a { color: var(--rose-light); text-decoration: none; }
+
+  @media (max-width: 600px) {
+    nav { padding: 14px 20px; }
+    .license-input-wrap { flex-direction: column; }
+    .btn-verify { width: 100%; }
+    .perks-row { gap: 16px; }
+    main { padding: 40px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Natural Cosmetic</a>
+  <a href="mailto:soporte@naturalcosmetic.com" class="nav-support">Need help?</a>
+</nav>
+
+<main>
+  <div class="card">
+
+    <!-- State: Loading -->
+    <div class="state" id="state-loading">
+      <div class="spinner-wrap">
+        <div class="spinner"></div>
+        <p class="spinner-label">Verifying your purchase…</p>
+      </div>
+    </div>
+
+    <!-- State: License key form -->
+    <div class="state" id="state-form">
+      <div class="form-icon">
+        <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M13 18C13 15.24 15.24 13 18 13C20.76 13 23 15.24 23 18C23 20.76 20.76 23 18 23" stroke="oklch(42% 0.02 50)" stroke-width="2" stroke-linecap="round"/>
+          <path d="M23 18H31L29 20M29 20L31 22M29 20V16" stroke="oklch(42% 0.02 50)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="18" cy="18" r="2" fill="oklch(68% 0.12 58)"/>
+        </svg>
+      </div>
+      <h1 class="form-title">Enter your <em>license key</em></h1>
+      <p class="form-sub">
+        You'll find your key in the confirmation email you received after your purchase.
+      </p>
+      <div class="license-input-wrap">
+        <input
+          class="license-input"
+          id="license-key-input"
+          type="text"
+          placeholder="XXXXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX"
+          autocomplete="off"
+          spellcheck="false"
+          onkeydown="if(event.key==='Enter') handleVerify()"
+        >
+        <button class="btn-verify" id="verify-btn" onclick="handleVerify()">
+          Access
+        </button>
+      </div>
+      <p class="form-hint">The key is unique to your purchase. Do not share it with others.</p>
+      <div class="form-error" id="form-error"></div>
+
+      <div class="divider">Don't have the ebook yet?</div>
+      <a href="/" class="btn-secondary-sm">View the ebook →</a>
+    </div>
+
+    <!-- State: Success / Download -->
+    <div class="state" id="state-success">
+      <div class="success-icon">
+        <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 18L15.5 23.5L26 13" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <p class="greeting" id="success-greeting">✦ Purchase verified</p>
+      <h1 class="success-title">Your ebook is <em>ready</em></h1>
+      <p class="success-sub" id="success-sub">
+        Hello, <strong id="customer-name"></strong>. Here is your download.
+      </p>
+
+      <div class="ebook-mockup-wrap">
+        <div class="ebook-mockup" id="ebook-mockup">
+          <div class="mockup-icon">📖</div>
+          <div class="mockup-product-name" id="product-name-label">Natural Cosmetic</div>
+        </div>
+        <div class="ebook-badge">
+          <span class="ebook-badge-icon">⭐</span>
+          <span class="ebook-badge-label">Yours</span>
+        </div>
+      </div>
+
+      <br>
+
+      <button class="btn-download" id="download-btn" onclick="triggerDownload()">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 4V16M12 16L8 12M12 16L16 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M4 20H20" stroke="white" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        Download ebook
+      </button>
+      <div class="download-note">
+        <svg viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 0L0.5 2.5V6.5C0.5 9.5 2.9 12.3 6 13C9.1 12.3 11.5 9.5 11.5 6.5V2.5L6 0Z" fill="oklch(72% 0.10 55)"/>
+        </svg>
+        Direct download · PDF · Unlimited access
+      </div>
+
+      <div class="perks-row">
+        <div class="perk"><div class="perk-dot">✓</div>Immediate access</div>
+        <div class="perk"><div class="perk-dot">✓</div>No expiration date</div>
+        <div class="perk"><div class="perk-dot">✓</div>Downloadable PDF</div>
+      </div>
+    </div>
+
+    <!-- State: Error / Access denied -->
+    <div class="state" id="state-error">
+      <div class="error-icon">
+        <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 16V14C12 10.69 14.69 8 18 8C21.31 8 24 10.69 24 14V16" stroke="oklch(42% 0.02 50)" stroke-width="2" stroke-linecap="round"/>
+          <rect x="9" y="16" width="18" height="12" rx="3" stroke="oklch(42% 0.02 50)" stroke-width="2"/>
+          <circle cx="18" cy="22" r="2" fill="oklch(33% 0.08 155)"/>
+        </svg>
+      </div>
+      <h1 class="error-title">Access <em>not authorized</em></h1>
+      <p class="error-body" id="error-body">
+        This page is exclusively for customers who purchased the ebook.
+        If you already purchased it, check the confirmation email and make sure to use the correct link.
+      </p>
+
+      <div class="license-input-wrap" style="margin-bottom:12px">
+        <input
+          class="license-input"
+          id="retry-key-input"
+          type="text"
+          placeholder="Try another license key"
+          autocomplete="off"
+          spellcheck="false"
+          onkeydown="if(event.key==='Enter') handleRetry()"
+        >
+        <button class="btn-verify" id="retry-btn" onclick="handleRetry()">
+          Try
+        </button>
+      </div>
+      <div class="form-error" id="retry-error"></div>
+
+      <div class="divider">Don't have the ebook yet?</div>
+      <a href="/" class="btn-secondary-sm">Get the ebook →</a>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>© 2026 Natural Cosmetic · <a href="#">Privacy Policy</a> · <a href="#">Terms</a> · <a href="mailto:soporte@naturalcosmetic.com">Support</a></p>
+</footer>
+
+<script>
+  // ── State machine ──────────────────────────────────────────
+  let currentLicenseKey = '';
+
+  function showState(name) {
+    document.querySelectorAll('.state').forEach(s => s.classList.remove('active'));
+    document.getElementById('state-' + name).classList.add('active');
+  }
+
+  // ── Init ───────────────────────────────────────────────────
+  (function init() {
+    const params = new URLSearchParams(window.location.search);
+    // Support both ?license_key= and ?key=
+    const key = (params.get('license_key') || params.get('key') || '').trim();
+
+    if (key) {
+      currentLicenseKey = key;
+      showState('loading');
+      verifyLicense(key, 'auto');
+    } else {
+      showState('form');
+    }
+  })();
+
+  // ── License verification ────────────────────────────────────
+  async function verifyLicense(key, source) {
+    try {
+      const res = await fetch('/api/verify-license', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ license_key: key }),
+      });
+      const data = await res.json();
+
+      if (data.valid) {
+        currentLicenseKey = key;
+        applySuccessState(data);
+        showState('success');
+        loadEbookCover();
+      } else {
+        const msg = data.error || 'Invalid or not found license.';
+        if (source === 'auto') {
+          applyErrorState(msg);
+          showState('error');
+        } else if (source === 'form') {
+          showFormError('form-error', msg);
+          setVerifyButtonState('verify-btn', false);
+        } else if (source === 'retry') {
+          showFormError('retry-error', msg);
+          setVerifyButtonState('retry-btn', false);
+        }
+      }
+    } catch (_) {
+      const msg = 'Connection error. Please try again.';
+      if (source === 'auto') {
+        applyErrorState(msg);
+        showState('error');
+      } else if (source === 'form') {
+        showFormError('form-error', msg);
+        setVerifyButtonState('verify-btn', false);
+      } else if (source === 'retry') {
+        showFormError('retry-error', msg);
+        setVerifyButtonState('retry-btn', false);
+      }
+    }
+  }
+
+  // ── Apply states ────────────────────────────────────────────
+  function applySuccessState(data) {
+    const name = data.customer_name || '';
+    const product = data.product_name || 'Natural Cosmetic';
+
+    if (name) {
+      document.getElementById('success-greeting').textContent = '✦ Purchase verified · ' + (data.customer_email || '');
+      document.getElementById('customer-name').textContent = name;
+    } else {
+      document.getElementById('success-sub').textContent = 'Your purchase has been verified. Here is your download.';
+    }
+    document.getElementById('product-name-label').textContent = product;
+  }
+
+  function applyErrorState(msg) {
+    if (msg) document.getElementById('error-body').textContent = msg;
+  }
+
+  // ── Download ────────────────────────────────────────────────
+  function triggerDownload() {
+    if (!currentLicenseKey) return;
+    const btn = document.getElementById('download-btn');
+    btn.disabled = true;
+    btn.innerHTML = `
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="9" stroke="white" stroke-width="2" stroke-dasharray="56.5" stroke-dashoffset="14" style="animation:spin 0.9s linear infinite;transform-origin:center"/>
+      </svg>
+      Preparing download…`;
+
+    // Trigger download — backend validates again before serving the file
+    window.location.href = '/api/download-ebook?license_key=' + encodeURIComponent(currentLicenseKey);
+
+    // Re-enable button after a short delay so user can retry if needed
+    setTimeout(() => {
+      btn.disabled = false;
+      btn.innerHTML = `
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 4V16M12 16L8 12M12 16L16 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M4 20H20" stroke="white" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        Download ebook`;
+    }, 3000);
+  }
+
+  // ── Form handlers ───────────────────────────────────────────
+  function handleVerify() {
+    const key = document.getElementById('license-key-input').value.trim();
+    clearFormError('form-error');
+    if (!key) {
+      showFormError('form-error', 'Please enter your license key.');
+      return;
+    }
+    setVerifyButtonState('verify-btn', true);
+    verifyLicense(key, 'form');
+  }
+
+  function handleRetry() {
+    const key = document.getElementById('retry-key-input').value.trim();
+    clearFormError('retry-error');
+    if (!key) {
+      showFormError('retry-error', 'Please enter your license key.');
+      return;
+    }
+    setVerifyButtonState('retry-btn', true);
+    verifyLicense(key, 'retry');
+  }
+
+  // ── Helpers ─────────────────────────────────────────────────
+  function showFormError(id, msg) {
+    const el = document.getElementById(id);
+    el.textContent = '⚠ ' + msg;
+    el.classList.add('visible');
+  }
+
+  function clearFormError(id) {
+    const el = document.getElementById(id);
+    el.textContent = '';
+    el.classList.remove('visible');
+  }
+
+  function setVerifyButtonState(btnId, loading) {
+    const btn = document.getElementById(btnId);
+    btn.disabled = loading;
+    btn.textContent = loading ? 'Verifying…' : 'Access';
+    if (btnId === 'retry-btn') btn.textContent = loading ? 'Verifying…' : 'Try';
+  }
+
+  // ── Load ebook cover from backend ────────────────────────────
+  async function loadEbookCover() {
+    try {
+      const res = await fetch('/api/product-cover');
+      if (!res.ok) return;
+      const { cover_url } = await res.json();
+      if (!cover_url) return;
+      const mockup = document.getElementById('ebook-mockup');
+      mockup.innerHTML = `<img src="${cover_url}" alt="Ebook cover">`;
+      mockup.classList.add('has-cover');
+    } catch (_) {}
+  }
+</script>
+
+</body>
+</html>

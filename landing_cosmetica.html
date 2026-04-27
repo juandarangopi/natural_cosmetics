@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Professional Cosmetology Course</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- Lemon Squeezy overlay checkout (optional, for embed mode) -->
+<!-- <script src="https://app.lemonsqueezy.com/js/lemon.js" defer></script> -->
+
+<style>
+  :root {
+    --cream: oklch(97% 0.008 30);
+    --blush: oklch(92% 0.022 15);
+    --rose: oklch(33% 0.08 155);
+    --rose-mid: oklch(48% 0.08 155);
+    --rose-light: oklch(68% 0.07 150);
+    --gold: oklch(68% 0.12 58);
+    --gold-light: oklch(88% 0.07 58);
+    --warm-dark: oklch(18% 0.02 50);
+    --warm-mid: oklch(42% 0.02 50);
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--cream);
+    color: var(--warm-dark);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  .announcement {
+    background: var(--rose);
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .announcement span { color: var(--gold-light); font-weight: 700; }
+
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: oklch(97% 0.008 60 / 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid oklch(88% 0.02 30);
+    padding: 14px 40px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 22px; font-weight: 600;
+    color: var(--rose); letter-spacing: 0.02em;
+  }
+  .nav-cta {
+    background: var(--rose); color: white; border: none;
+    padding: 10px 24px; border-radius: 3px;
+    font-family: var(--font-body); font-size: 13px; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    cursor: pointer; transition: background 0.2s, transform 0.15s;
+    text-decoration: none;
+  }
+  .nav-cta:hover { background: var(--rose-mid); transform: translateY(-1px); }
+
+  .hero {
+    min-height: 92vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center; gap: 0;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 70% at 80% 40%, oklch(90% 0.04 20), transparent 70%);
+    pointer-events: none;
+  }
+  .hero-left {
+    padding: 80px 60px 80px 80px;
+    position: relative; z-index: 1;
+    opacity: 1; transform: none;
+  }
+  .hero-tag {
+    display: inline-block;
+    background: var(--gold-light); color: var(--warm-dark);
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 6px 14px; border-radius: 2px; margin-bottom: 28px;
+  }
+  .hero-headline {
+    font-family: var(--font-display);
+    font-size: clamp(42px, 5vw, 70px);
+    font-weight: 400; line-height: 1.08;
+    color: var(--warm-dark); margin-bottom: 8px;
+  }
+  .hero-headline em { font-style: italic; color: var(--rose); }
+  .hero-sub {
+    font-family: var(--font-display);
+    font-size: clamp(20px, 2.5vw, 30px);
+    font-weight: 300; color: var(--rose-mid);
+    margin-bottom: 24px; font-style: italic;
+  }
+  .hero-body {
+    font-size: 16px; color: var(--warm-mid);
+    max-width: 480px; margin-bottom: 40px; line-height: 1.75;
+  }
+  .hero-ctas { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--rose); color: white; border: none;
+    padding: 18px 36px; border-radius: 3px;
+    font-family: var(--font-body); font-size: 14px; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    cursor: pointer; transition: all 0.2s;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-primary:hover {
+    background: oklch(38% 0.16 10);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px oklch(44% 0.13 10 / 0.3);
+  }
+  .btn-secondary {
+    background: transparent; color: var(--rose);
+    border: 1.5px solid var(--rose);
+    padding: 17px 28px; border-radius: 3px;
+    font-family: var(--font-body); font-size: 14px; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    cursor: pointer; transition: all 0.2s;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-secondary:hover { background: var(--blush); }
+
+  .hero-trust {
+    display: flex; gap: 32px; margin-top: 48px;
+    padding-top: 32px; border-top: 1px solid oklch(85% 0.02 30);
+  }
+  .trust-item { display: flex; flex-direction: column; }
+  .trust-num {
+    font-family: var(--font-display);
+    font-size: 36px; font-weight: 600;
+    color: var(--rose); line-height: 1;
+  }
+  .trust-label { font-size: 12px; color: var(--warm-mid); margin-top: 4px; }
+
+  .hero-right {
+    position: relative; height: 100%; min-height: 600px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-mockup {
+    /* width: 340px; height: 440px; */
+    width: 282px; height: 440px;
+    background: linear-gradient(145deg, oklch(92% 0.025 15), oklch(86% 0.04 20));
+    border-radius: 6px;
+    box-shadow: 0 30px 80px oklch(44% 0.13 10 / 0.2), 0 2px 4px oklch(44% 0.13 10 / 0.1);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 12px; position: relative; overflow: hidden;
+  }
+  .hero-mockup::before {
+    content: ''; position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      45deg, transparent, transparent 20px,
+      oklch(80% 0.04 15 / 0.15) 20px,
+      oklch(80% 0.04 15 / 0.15) 21px
+    );
+  }
+  .mockup-label {
+    font-family: var(--font-body); font-size: 11px;
+    color: oklch(50% 0.04 15); letter-spacing: 0.1em;
+    text-transform: uppercase; text-align: center; z-index: 1;
+  }
+  .mockup-icon { font-size: 48px; z-index: 1; opacity: 0.6; }
+  .hero-badge {
+    position: absolute; top: -10px; right: -10px;
+    width: 110px; height: 110px;
+    background: var(--gold); border-radius: 50%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: white;
+    box-shadow: 0 8px 24px oklch(72% 0.10 55 / 0.4);
+  }
+  .badge-price {
+    font-family: var(--font-display);
+    font-size: 28px; font-weight: 600; line-height: 1;
+  }
+  .badge-label { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .reveal {
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  section { padding: 96px 0; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+  .section-tag {
+    display: inline-block;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 400; line-height: 1.15; margin-bottom: 20px;
+  }
+  .section-title em { font-style: italic; color: var(--rose); }
+  .section-sub {
+    font-size: 17px; color: var(--warm-mid);
+    max-width: 540px; line-height: 1.75;
+  }
+
+  .pain-bg { background: var(--rose); color: white; padding: 80px 0; }
+  .pain-bg .section-title { color: white; }
+  .pain-bg .section-title em { color: var(--gold-light); }
+  .pain-bg .section-tag { color: var(--gold-light); }
+  .pain-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 32px; margin-top: 56px;
+  }
+  .pain-card {
+    background: oklch(40% 0.12 10);
+    border-radius: 6px; padding: 32px;
+    border-left: 3px solid var(--gold);
+  }
+  .pain-card h3 {
+    font-family: var(--font-display);
+    font-size: 20px; font-weight: 500;
+    margin-bottom: 10px; color: white;
+  }
+  .pain-card p { font-size: 14px; color: oklch(85% 0.04 15); line-height: 1.7; }
+
+  .forwhom-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 60px; align-items: center; margin-top: 60px;
+  }
+  .forwhom-list { list-style: none; display: flex; flex-direction: column; gap: 18px; }
+  .forwhom-list li { display: flex; gap: 16px; align-items: flex-start; }
+  .forwhom-check {
+    width: 28px; height: 28px;
+    background: var(--gold-light); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-size: 13px;
+    color: var(--warm-dark); font-weight: 700; margin-top: 2px;
+  }
+  .forwhom-list li span { font-size: 16px; line-height: 1.65; color: var(--warm-dark); }
+  .forwhom-image {
+    background: linear-gradient(145deg, oklch(92% 0.025 15), oklch(87% 0.04 20));
+    height: 400px; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; color: oklch(55% 0.04 15);
+    letter-spacing: 0.1em; text-transform: uppercase;
+    position: relative; overflow: hidden;
+  }
+  .forwhom-image::after {
+    content: ''; position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      -45deg, transparent, transparent 20px,
+      oklch(80% 0.04 15 / 0.12) 20px,
+      oklch(80% 0.04 15 / 0.12) 21px
+    );
+  }
+
+  .includes-bg { background: var(--blush); }
+  .modules-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px; margin-top: 56px;
+  }
+  .module-card {
+    background: white; border-radius: 6px; padding: 32px 28px;
+    box-shadow: 0 4px 20px oklch(44% 0.13 10 / 0.06);
+    transition: transform 0.2s, box-shadow 0.2s;
+    border-top: 3px solid var(--rose-light);
+  }
+  .module-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px oklch(44% 0.13 10 / 0.12);
+  }
+  .module-num {
+    font-family: var(--font-display);
+    font-size: 48px; font-weight: 600;
+    color: var(--rose-light); line-height: 1; margin-bottom: 12px;
+  }
+  .module-title {
+    font-family: var(--font-display);
+    font-size: 20px; font-weight: 600;
+    margin-bottom: 10px; color: var(--warm-dark);
+  }
+  .module-desc { font-size: 14px; color: var(--warm-mid); line-height: 1.7; }
+  .module-topics {
+    margin-top: 14px; list-style: none;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .module-topics li {
+    font-size: 13px; color: var(--warm-mid);
+    display: flex; gap: 8px; align-items: flex-start;
+  }
+  .module-topics li::before { content: '—'; color: var(--gold); flex-shrink: 0; }
+
+  .bonus-grid {
+    display: grid; grid-template-columns: 380px 1fr;
+    gap: 80px; align-items: center; margin-top: 60px;
+  }
+  .bonus-photo {
+    width: 100%; height: 480px;
+    background: linear-gradient(160deg, oklch(92% 0.025 15), oklch(85% 0.04 20));
+    border-radius: 6px; position: relative; overflow: hidden;
+    display: flex; align-items: flex-end; justify-content: flex-start;
+  }
+  .bonus-photo::after {
+    content: ''; position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      45deg, transparent, transparent 20px,
+      oklch(80% 0.04 15 / 0.10) 20px,
+      oklch(80% 0.04 15 / 0.10) 21px
+    );
+  }
+  .photo-placeholder-label {
+    font-size: 11px; color: oklch(55% 0.04 15);
+    letter-spacing: 0.1em; text-transform: uppercase;
+    position: absolute; bottom: 20px; left: 20px; z-index: 1;
+    background: white; padding: 6px 12px; border-radius: 3px;
+  }
+  .bonus-name {
+    font-family: var(--font-display);
+    font-size: 42px; font-weight: 400;
+    font-style: italic; color: var(--rose); margin-bottom: 8px;
+  }
+  .bonus-title {
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 24px;
+  }
+  .bonus-bio { font-size: 16px; color: var(--warm-mid); line-height: 1.8; margin-bottom: 28px; }
+  .bonus-stats { display: flex; gap: 40px; }
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 40px; font-weight: 600;
+    color: var(--rose); line-height: 1;
+  }
+  .stat-label { font-size: 12px; color: var(--warm-mid); margin-top: 4px; }
+
+  .testimonials-bg { background: var(--rose); }
+  .testimonials-bg .section-title { color: white; }
+  .testimonials-bg .section-tag { color: var(--gold-light); }
+  .testimonials-bg .section-title em { color: var(--gold-light); }
+  .testimonials-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px; margin-top: 56px;
+  }
+  .testimonial-card { background: white; border-radius: 6px; padding: 32px; }
+  .stars { color: var(--gold); font-size: 16px; margin-bottom: 16px; letter-spacing: 2px; }
+  .testimonial-text {
+    font-family: var(--font-display);
+    font-size: 18px; font-style: italic;
+    font-weight: 400; line-height: 1.6;
+    color: var(--warm-dark); margin-bottom: 20px;
+  }
+  .testimonial-author { display: flex; gap: 14px; align-items: center; }
+  .author-avatar {
+    width: 44px; height: 44px;
+    background: var(--blush); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-size: 18px;
+    font-style: italic; color: var(--rose); font-weight: 600;
+  }
+  .author-name { font-size: 14px; font-weight: 600; color: var(--warm-dark); }
+  .author-meta { font-size: 12px; color: var(--warm-mid); }
+
+  .guarantee-box {
+    max-width: 700px; margin: 0 auto; text-align: center;
+    background: white; border-radius: 8px; padding: 64px;
+    box-shadow: 0 4px 40px oklch(44% 0.13 10 / 0.08);
+    border: 1px solid oklch(90% 0.02 20);
+  }
+  .guarantee-badge {
+    width: 100px; height: 100px; background: var(--gold);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 32px;
+    box-shadow: 0 8px 30px oklch(72% 0.10 55 / 0.35);
+  }
+  .guarantee-badge-inner { font-family: var(--font-display); font-size: 32px; font-weight: 700; color: white; }
+  .guarantee-title {
+    font-family: var(--font-display);
+    font-size: 38px; font-weight: 400; margin-bottom: 16px;
+  }
+  .guarantee-title em { font-style: italic; color: var(--rose); }
+  .guarantee-text { font-size: 16px; color: var(--warm-mid); line-height: 1.8; }
+
+  .pricing-bg { background: var(--blush); }
+  .pricing-box {
+    max-width: 560px; margin: 56px auto 0;
+    background: white; border-radius: 8px; overflow: hidden;
+    box-shadow: 0 20px 70px oklch(44% 0.13 10 / 0.15);
+  }
+  .pricing-header {
+    background: var(--rose); padding: 36px 48px;
+    text-align: center; color: white;
+  }
+  .pricing-product-name {
+    font-family: var(--font-display);
+    font-size: 28px; font-weight: 400; font-style: italic; margin-bottom: 4px;
+  }
+  .pricing-subtitle { font-size: 13px; opacity: 0.8; letter-spacing: 0.05em; }
+  .pricing-body { padding: 48px; }
+  .price-display { text-align: center; margin-bottom: 32px; }
+  .price-original {
+    font-size: 16px; color: var(--warm-mid);
+    text-decoration: line-through; margin-bottom: 6px;
+  }
+  .price-main {
+    font-family: var(--font-display);
+    font-size: 72px; font-weight: 600;
+    color: var(--warm-dark); line-height: 1;
+  }
+  .price-currency {
+    font-family: var(--font-display);
+    font-size: 32px; vertical-align: top;
+    line-height: 1.4; margin-right: 4px;
+  }
+  .price-period { font-size: 14px; color: var(--warm-mid); margin-top: 6px; }
+  .pricing-includes {
+    list-style: none; display: flex; flex-direction: column;
+    gap: 14px; margin-bottom: 36px;
+  }
+  .pricing-includes li { display: flex; gap: 12px; align-items: flex-start; font-size: 15px; }
+  .pi-check {
+    width: 22px; height: 22px;
+    background: oklch(88% 0.06 55); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; color: var(--warm-dark);
+    flex-shrink: 0; margin-top: 1px; font-weight: 700;
+  }
+
+  .stripe-btn {
+    width: 100%; background: var(--rose); color: white; border: none;
+    padding: 20px; border-radius: 4px;
+    font-family: var(--font-body); font-size: 15px; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    cursor: pointer; transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+  }
+  .stripe-btn:hover {
+    background: oklch(38% 0.16 10);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 36px oklch(44% 0.13 10 / 0.3);
+  }
+  .stripe-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+  .stripe-btn .lock-icon { font-size: 16px; }
+  .stripe-secure {
+    text-align: center; margin-top: 14px;
+    font-size: 12px; color: var(--warm-mid);
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .stripe-error {
+    background: oklch(95% 0.02 20);
+    border: 1px solid oklch(70% 0.08 10);
+    border-radius: 4px; padding: 12px 16px;
+    font-size: 13px; color: var(--rose);
+    margin-top: 14px; display: none;
+  }
+  .stripe-error.visible { display: block; }
+  .faq-list { max-width: 720px; margin: 56px auto 0; display: flex; flex-direction: column; gap: 2px; }
+  .faq-item { border-bottom: 1px solid oklch(88% 0.02 30); overflow: hidden; }
+  .faq-question {
+    width: 100%; background: none; border: none;
+    text-align: left; padding: 24px 0;
+    font-family: var(--font-body); font-size: 17px; font-weight: 600;
+    color: var(--warm-dark); cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center; gap: 20px;
+    transition: color 0.2s;
+  }
+  .faq-question:hover { color: var(--rose); }
+  .faq-arrow { font-size: 20px; color: var(--gold); transition: transform 0.3s; flex-shrink: 0; }
+  .faq-item.open .faq-arrow { transform: rotate(45deg); }
+  .faq-answer {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.4s ease;
+    font-size: 15px; color: var(--warm-mid); line-height: 1.8; padding-bottom: 0;
+  }
+  .faq-item.open .faq-answer { max-height: 300px; padding-bottom: 20px; }
+
+  .bottom-cta {
+    background: var(--warm-dark); padding: 100px 0;
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .bottom-cta::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 50% 50%, oklch(35% 0.10 10), transparent 70%);
+    pointer-events: none;
+  }
+  .bottom-cta .section-title { color: white; position: relative; z-index: 1; }
+  .bottom-cta .section-title em { color: var(--gold); }
+  .bottom-cta p {
+    color: oklch(78% 0.03 30); font-size: 18px;
+    margin: 20px auto 40px; max-width: 500px; position: relative; z-index: 1;
+  }
+
+  footer {
+    background: oklch(12% 0.02 30);
+    color: oklch(65% 0.02 30);
+    text-align: center; padding: 32px; font-size: 13px;
+  }
+  footer a { color: var(--rose-light); text-decoration: none; }
+
+  #tweaks-panel {
+    display: none;
+    position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+    background: white; border-radius: 8px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    padding: 24px; width: 320px;
+    font-family: var(--font-body);
+    border: 1px solid oklch(90% 0.02 20);
+  }
+  #tweaks-panel.open { display: block; }
+  .tweaks-title {
+    font-family: var(--font-display);
+    font-size: 20px; font-weight: 600;
+    color: var(--warm-dark); margin-bottom: 20px;
+  }
+  .tweak-group { margin-bottom: 18px; }
+  .tweak-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--warm-mid);
+    margin-bottom: 6px; display: block;
+  }
+  .tweak-input {
+    width: 100%; padding: 8px 12px; border-radius: 4px;
+    border: 1px solid oklch(85% 0.02 30);
+    font-family: var(--font-body); font-size: 14px; color: var(--warm-dark);
+  }
+  .tweak-input:focus { outline: none; border-color: var(--rose); }
+  .tweak-info { font-size: 11px; color: var(--warm-mid); margin-top: 4px; }
+
+  .hero-mockup.has-cover {
+    background: none;
+    box-shadow: 0 30px 80px oklch(44% 0.13 10 / 0.2), 0 2px 4px oklch(44% 0.13 10 / 0.1);
+    padding: 0;
+  }
+  .hero-mockup.has-cover::before { display: none; }
+  .hero-mockup.has-cover img {
+    width: 100%; height: 100%;
+    object-fit: cover; border-radius: 6px;
+    display: block;
+  }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-right { display: none; }
+    .hero-left { padding: 60px 32px; }
+    .pain-grid, .modules-grid, .testimonials-grid { grid-template-columns: 1fr; }
+    .forwhom-grid, .bonus-grid { grid-template-columns: 1fr; }
+    .hero-trust { gap: 20px; }
+    nav { padding: 14px 24px; }
+    .pricing-body { padding: 32px; }
+    .guarantee-box { padding: 40px 24px; }
+    section { padding: 64px 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Announcement -->
+<div class="announcement">
+  ⏳ Limited-time special offer — <span>50% off</span> — Only a few hours left
+</div>
+
+<!-- Nav -->
+<nav>
+  <div class="nav-logo">Natural Cosmetic</div>
+  <a href="#pricing" class="nav-cta">Enroll now →</a>
+</nav>
+
+<!-- Hero -->
+<section class="hero" style="padding:0">
+  <div class="hero-left">
+    <span class="hero-tag">✦ Complete digital course</span>
+    <h1 class="hero-headline" style="font-size: 70px">
+      Natural<br><em>Cosmetic</em><br>
+    </h1>
+    <p class="hero-sub">Create Your Own Natural Cosmetics at Home (Without Chemicals or High Costs)</p>
+    <p class="hero-body">
+      Learn step by step how to make shampoos, creams, makeup, and more using natural ingredients — even if you’re starting from zero.
+    </p>
+    <div class="hero-ctas">
+      <a href="#pricing" class="btn-primary">START NOW→</a>
+      <a href="#content" class="btn-secondary">SEE EVERYTHING INCLUDED</a>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-item"><span class="trust-num">2,400+</span><span class="trust-label">Active students</span></div>
+      <div class="trust-item"><span class="trust-num">97%</span><span class="trust-label">Satisfaction rate</span></div>
+      <div class="trust-item"><span class="trust-num">8</span><span class="trust-label">Full modules</span></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div style="position:relative">
+      <div class="hero-mockup" id="hero-mockup">
+        <div class="mockup-icon">🎓</div>
+        <div class="mockup-label">product cover<br>image here</div>
+        <!-- <img src="uploads/portrait.png" alt="Portrait photo" style="width:100%;height:100%;object-fit:cover;border-radius:6px;display:block;"> -->
+      </div>
+      <div class="hero-badge">
+        <div class="badge-price">$7</div>
+        <div class="badge-label">One-Time Payment</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pain Points -->
+<section class="pain-bg">
+  <div class="container">
+    <span class="section-tag">Does This Sound Like You?</span>
+    <h2 class="section-title reveal">You want better skincare<br><em>but something isn’t working</em></h2>
+    <div class="pain-grid">
+      <div class="pain-card reveal">
+        <h3>Spending Too Much on Products</h3>
+        <p>You keep buying creams, makeup, and treatments… but they’re expensive and don’t always deliver results.</p>
+      </div>
+      <div class="pain-card reveal">
+        <h3>You Don’t Know What’s in Your Products</h3>
+        <p>Many products contain harsh chemicals that can irritate your skin or harm it over time.</p>
+      </div>
+      <div class="pain-card reveal">
+        <h3>You Want to Do It Yourself… But Don’t Know How</h3>
+        <p>You’ve seen DIY recipes online, but they’re confusing, incomplete, or just don’t work.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- For Whom -->
+<section>
+  <div class="container">
+    <span class="section-tag">This course is for you if…</span>
+    <h2 class="section-title reveal">You're ready to embrace<br><em>natural beauty</em></h2>
+    <div class="forwhom-grid">
+      <ul class="forwhom-list reveal">
+        <li><span class="forwhom-check">✓</span><span>You want to eliminate toxins: You’re tired of using products filled with chemicals and want a healthier, cleaner alternative for your skin.</span></li>
+        <li><span class="forwhom-check">✓</span><span>You love DIY projects: You enjoy the satisfaction of creating something with your own hands that is high-quality and personalized.</span></li>
+        <li><span class="forwhom-check">✓</span><span>You're looking for simplicity: You want clear, step-by-step recipes that don’t require a professional laboratory or expensive equipment.</span></li>
+        <li><span class="forwhom-check">✓</span><span>You want to save money: You’re ready to stop overpaying for "organic" brands and start making premium products at a fraction of the cost.</span></li>
+        <li><span class="forwhom-check">✓</span><span>You care about the planet: You want to reduce plastic waste and lead a more sustainable, eco-friendly lifestyle.</span></li>
+        <li><span class="forwhom-check">✓</span><span>You learn at your own pace: You want instant access to digital guides that you can read anytime, anywhere, with no deadlines.</span></li>
+      </ul>
+      <div class="forwhom-image reveal">
+        <img src="uploads/representative_photo.jpeg" alt="Representative photo" style="width:100%;height:100%;object-fit:cover;border-radius:6px;display:block;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- What's Included -->
+<section class="includes-bg" id="content">
+  <div class="container">
+    <span class="section-tag">Course content</span>
+    <h2 class="section-title reveal">Everything you're going<br><em>to learn</em></h2>
+    <p class="section-sub reveal">8 complete modules, from the basics to advanced techniques. Lifetime access and updates included.</p>
+    <div class="modules-grid">
+      <div class="module-card reveal">
+        <div class="module-num">01</div>
+        <div class="module-title">Skin Diagnosis & Natural Care</div>
+        <div class="module-desc">Learn how to identify your specific skin type and select the exact botanical oils, plants, and natural butters that will nourish and heal your skin effectively.</div>
+        <ul class="module-topics">
+        
+        
+        </ul>
+      </div>
+      <div class="module-card reveal">
+        <div class="module-num">02</div>
+        <div class="module-title">Professional Formulation at Home</div>
+        <div class="module-desc">Master the techniques to create your own beauty products from scratch, including anti-aging serums, revitalizing shampoos, and moisturizing body creams.</div>
+        <ul class="module-topics">
+          
+        </ul>
+      </div>
+      <div class="module-card reveal">
+        <div class="module-num">03</div>
+        <div class="module-title">Toxin-Free Mineral Makeup</div>
+        <div class="module-desc">Discover how to craft high-quality makeup like foundations, blushes, and lipsticks using 100% natural pigments and minerals, free from harmful parabens.</div>
+        <ul class="module-topics">
+         
+        </ul>
+      </div>
+      <div class="module-card reveal">
+        <div class="module-num">04</div>
+        <div class="module-title">Sun Protection & Hygiene</div>
+        <div class="module-desc">Create your own natural sunscreen, aluminum-free deodorants, and refreshing tonics to protect your body daily without relying on industrial chemicals.</div>
+        <ul class="module-topics">
+          
+        </ul>
+      </div>
+      <div class="module-card reveal">
+        <div class="module-num">05</div>
+        <div class="module-title">Hair & Body Rituals</div>
+        <div class="module-desc">Expert recipes for hair health, from solid shampoos to masks, plus body treatments like anti-stretch mark butters and relaxing massage oils.</div>
+        <ul class="module-topics">
+          
+        </ul>
+      </div>
+      <div class="module-card reveal">
+        <div class="module-num">06</div>
+        <div class="module-title">Sustainable Beauty Lifestyle</div>
+        <div class="module-desc">Adopt a zero-waste routine that saves you money while protecting the environment, replacing commercial brands with premium, handmade alternatives.</div>
+        <ul class="module-topics">
+          
+        </ul>
+      </div>
+      <div class="module-card reveal">
+        <div class="module-num">07</div>
+        <div class="module-title">Easy-to-follow instructions for everyone</div>
+        <div class="module-desc">Forget complex chemistry. Our guides are designed for beginners with clear, everyday language.</div>
+        <ul class="module-topics">
+          <li>Detailed ingredient measurements</li>
+          <li>Preparation time for each formula</li>
+          <li>Simple tools found in any kitchen</li>
+        </ul>
+      </div>
+      <div class="module-card reveal">
+        <div class="module-num">08</div>
+        <div class="module-title">Keep your creations fresh and safe</div>
+        <div class="module-desc">Learn the secrets to making your natural products last without using harsh industrial preservatives.</div>
+        <ul class="module-topics">
+          <li>Natural antioxidant techniques</li>
+          <li>Proper glass and container selection</li>
+          <li>Optimal storage conditions for potency</li>
+        </ul>
+      </div>
+      <div class="module-card reveal" style="background: var(--rose); border-top-color: var(--gold);">
+        <div class="module-num" style="color: oklch(62% 0.12 10)">+</div>
+        <div class="module-title" style="color:white">Exclusive Bonuses</div>
+        <div class="module-desc" style="color:oklch(85% 0.04 15)">More than just recipes; we provide the resources to help you become an expert.</div>
+        <ul class="module-topics" style="margin-top:14px">
+          <li style="color:oklch(85% 0.04 15)">Supplier directory guide</li>
+          <li style="color:oklch(85% 0.04 15)">Safety Protocols: Best practices for handling raw botanical materials</li>
+          <li style="color:oklch(85% 0.04 15)">Digital Access: Optimized for viewing on mobile, tablet, or desktop</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Bonus -->
+<section>
+  <div class="container">
+    <span class="section-tag">Exclusive Bonus: The Trending Recipes Guide</span>
+    <div class="bonus-grid">
+      <div class="bonus-photo reveal">
+        <img src="uploads/bonus_portrait_2.png" alt="Bonus" style="width:100%;height:100%;object-fit:cover;border-radius:6px;display:block;">
+      </div>
+      <div class="reveal">
+        <div class="bonus-name">Supercharge your results with our Special Bonus Edition!</div>
+        <div class="bonus-title">What’s inside this exclusive guide?</div>
+        <p class="bonus-bio">
+          When you get the bundle today, you don’t just get the basics. We are including our Premium Bonus Recipe Book, a curated collection of advanced formulas that are currently trending in the natural beauty world.
+  
+        </p>
+        <li>Anti-Aging Power: Master the "Eye Contour Gel" and "Night Serums" to rejuvenate your skin while you sleep.</li>
+          <li>Protection Rituals: Learn to craft your own Natural Sunscreen and Mineral Bronzers.</li>
+          <li>Eco-Hygiene: Formulas for aluminum-free deodorants and refreshing botanical body mists.</li>
+          <li>Professional Finishes: Tips to get the exact texture and scent of high-end luxury brands.</li>
+        <div class="bonus-stats">
+          <div><div class="stat-num">50+</div><div class="stat-label">Natural Recipes</div></div>
+          <div><div class="stat-num">Instant</div><div class="stat-label">Digital Access</div></div>
+          <div><div class="stat-num">4.9★</div><div class="stat-label">Average rating</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials-bg">
+  <div class="container">
+    <span class="section-tag">What our clients say</span>
+    <h2 class="section-title reveal"><em>Real</em> results</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"This completely changed how I take care of my skin. I’ll never go back to store-bought products!"</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">M</div>
+          <div><div class="author-name">Sarah M.</div><div class="author-meta">Cologne, Germany</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"I was afraid it would be too complicated or require a professional lab, but the recipes are so easy to follow with basic kitchen tools! The Lavender and Verbena body mist from the Bonus book is now my signature scent. It's empowering to create beauty products that are truly eco-friendly."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">S</div>
+          <div><div class="author-name">Charlotte R.</div><div class="author-meta">Brussels, Belgium</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"I went from knowing nothing to having my own home studio. I recommend it to all my friends. Worth every penny."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">V</div>
+          <div><div class="author-name">Beatrice P.</div><div class="author-meta">Austin, Texas</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Guarantee -->
+<section>
+  <div class="container">
+    <div class="guarantee-box reveal">
+      <div class="guarantee-badge">
+        <div class="guarantee-badge-inner">7</div>
+      </div>
+      <h2 class="guarantee-title"><em>7-Day</em> Money-Back Guarantee</h2>
+      <p class="guarantee-text">
+        If within the first 7 days you're not completely satisfied with the content,
+        we'll refund 100% of your investment — no questions asked, no fine print.
+        That's how confident we are in the quality of this course.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing + Stripe -->
+<section class="pricing-bg" id="pricing">
+  <div class="container" style="text-align:center">
+    <span class="section-tag">Investment</span>
+    <h2 class="section-title reveal">Pay once, access it<br><em>for life</em></h2>
+    <div class="pricing-box reveal">
+      <div class="pricing-header">
+        <div class="pricing-product-name">Natural Cosmetics Complete Bundle</div>
+        <div class="pricing-subtitle">Get Instant Access </div>
+      </div>
+      <div class="pricing-body">
+        <div class="price-display">
+          <div class="price-original">Regular price: $30</div>
+          <div class="price-main"><span class="price-currency">$</span>10</div>
+          <div class="price-period">One-time payment — lifetime access</div>
+        </div>
+        <ul class="pricing-includes">
+          <li><span class="pi-check">✓</span> Natural Cosmetics Digital Guide (+40 recipes)</li>
+          <li><span class="pi-check">✓</span> Natural Makeup Digital Guide (Professional formulas)</li>
+          <li><span class="pi-check">✓</span> FREE BONUS: Trending Recipes eBook</li>
+          <li><span class="pi-check">✓</span> Downloadable PDF materials</li>
+          <li><span class="pi-check">✓</span> One-time payment. Lifetime access.</li>
+          <li><span class="pi-check">✓</span> 7-day money-back guarantee</li>
+        </ul>
+
+        <button class="stripe-btn" id="checkout-btn" onclick="initiateCheckout()">
+          <span class="lock-icon">🔒</span>
+          Enroll now — $97
+        </button>
+
+        <div class="stripe-error" id="stripe-error"></div>
+
+        <div class="stripe-secure">
+          <svg width="12" height="14" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 0L0.5 2.5V6.5C0.5 9.5 2.9 12.3 6 13C9.1 12.3 11.5 9.5 11.5 6.5V2.5L6 0Z" fill="oklch(72% 0.10 55)"/>
+          </svg>
+          100% secure payment powered by Lemon Squeezy
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="container" style="text-align:center">
+    <span class="section-tag">Frequently asked questions</span>
+    <h2 class="section-title reveal">Everything you need<br><em>to know</em></h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Do I need professional equipment to make these recipes?
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-answer">Not at all! All our formulas are designed to be made at home using basic kitchen tools like glass jars, a digital scale, and a blender. You don’t need a professional laboratory to get professional results.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          How and when will I receive the guides?
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-answer">You will get instant access. Once your payment is confirmed, you'll receive an email with the download links for the three eBooks (Cosmetics, Makeup, and Bonus) so you can start creating immediately.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Is this a physical book or a digital download?
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-answer">These are high-quality digital eBooks in PDF format. This allows you to have them forever on your phone, tablet, or computer, and print them out if you prefer to have a physical copy in your workspace.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Can I find the ingredients easily in the US or Europe?
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-answer">Yes! We focus on accessible ingredients like botanical oils, clays, and essential oils that you can easily find at local health stores, organic shops, or online retailers like Amazon.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Is there a certification included?
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-answer">No, this bundle is a self-paced digital resource designed for personal use and practical learning. Our focus is on providing you with effective, safe, and natural formulas you can use for yourself or your family.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Is my payment secure?
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-answer">Absolutely. We use industry-standard encrypted payment gateways to ensure your information is 100% protected. This is a secure, one-time payment of $7.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Bottom CTA -->
+<section class="bottom-cta">
+  <div class="container">
+    <h2 class="section-title reveal">Your moment is<br><em>now</em></h2>
+    <p>Stop putting your dream on hold. Over 2,400 students have already made the decision. What about you?</p>
+    <a href="#pricing" class="btn-primary" style="position:relative;z-index:1">Enroll today →</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>© 2026 Cosmetica Pro · <a href="#">Privacy Policy</a> · <a href="#">Terms</a> · <a href="#">Contact</a></p>
+  <p style="margin-top:8px;font-size:11px">Individual results may vary. All payments are processed securely by Stripe.</p>
+</footer>
+
+<!-- Tweaks Panel -->
+<div id="tweaks-panel">
+  <div class="tweaks-title">Tweaks</div>
+  <div class="tweak-group">
+    <label class="tweak-label">Course name</label>
+    <input class="tweak-input" id="tw-name" type="text" value="Professional Cosmetology" oninput="applyTweaks()">
+  </div>
+  <div class="tweak-group">
+    <label class="tweak-label">Price (number)</label>
+    <input class="tweak-input" id="tw-price" type="text" value="97" oninput="applyTweaks()">
+  </div>
+  <div class="tweak-group">
+    <label class="tweak-label">Original price (crossed out)</label>
+    <input class="tweak-input" id="tw-orig" type="text" value="197" oninput="applyTweaks()">
+  </div>
+  <div class="tweak-group">
+    <label class="tweak-label">Currency symbol</label>
+    <input class="tweak-input" id="tw-currency" type="text" value="$" oninput="applyTweaks()">
+  </div>
+  <div class="tweak-group">
+    <label class="tweak-label">Lemon Squeezy Checkout URL</label>
+    <input class="tweak-input" id="tw-checkout-url" type="text" placeholder="https://your-store.lemonsqueezy.com/buy/..." oninput="applyTweaks()">
+    <div class="tweak-info">Direct buy link from your Lemon Squeezy product (recommended)</div>
+  </div>
+  <div class="tweak-group">
+    <label class="tweak-label">Lemon Squeezy Variant ID</label>
+    <input class="tweak-input" id="tw-variant-id" type="text" placeholder="123456" oninput="applyTweaks()">
+    <div class="tweak-info">Alternative: Variant ID (requires backend + API key)</div>
+  </div>
+  <div class="tweak-group">
+    <label class="tweak-label">Success URL</label>
+    <input class="tweak-input" id="tw-success" type="text" placeholder="https://your-site.com/thank-you" oninput="applyTweaks()">
+  </div>
+</div>
+
+<script>
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "courseName": "Professional Cosmetology",
+  "price": "7",
+  "originalPrice": "30",
+  "currency": "$",
+  "lsCheckoutUrl": "",
+  "lsVariantId": "",
+  "successUrl": ""
+}/*EDITMODE-END*/;
+
+let cfg = Object.assign({}, TWEAK_DEFAULTS);
+
+// Load checkout config from backend (keeps sensitive URLs out of the HTML)
+fetch('/api/config')
+  .then(r => r.json())
+  .then(data => {
+    if (data.lsCheckoutUrl) cfg.lsCheckoutUrl = data.lsCheckoutUrl;
+    if (data.lsVariantId)   cfg.lsVariantId   = data.lsVariantId;
+  })
+  .catch(() => { /* fallback: use TWEAK_DEFAULTS values if set */ });
+
+// Scroll Reveal
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// FAQ
+function toggleFaq(btn) {
+  btn.closest('.faq-item').classList.toggle('open');
+}
+
+// Lemon Squeezy Checkout
+async function initiateCheckout() {
+  const checkoutUrl = cfg.lsCheckoutUrl || document.getElementById('tw-checkout-url').value.trim();
+  const variantId = cfg.lsVariantId || document.getElementById('tw-variant-id').value.trim();
+  const errorEl = document.getElementById('stripe-error');
+  errorEl.classList.remove('visible');
+
+  // Option 1: direct Lemon Squeezy buy link (no backend needed)
+  if (checkoutUrl) {
+    window.location.href = checkoutUrl;
+    return;
+  }
+
+  // Option 2: backend API approach (requires LS_API_KEY + variantId)
+  if (!variantId) {
+    errorEl.textContent = '⚠ Configure the Lemon Squeezy Checkout URL in the Tweaks panel.';
+    errorEl.classList.add('visible'); return;
+  }
+
+  const successUrl = cfg.successUrl || document.getElementById('tw-success').value.trim() || window.location.origin + '/thank-you';
+  const btn = document.getElementById('checkout-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span style="display:inline-block">⏳</span> Redirecting...';
+
+  try {
+    const res = await fetch('/api/create-checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ variantId, successUrl, cancelUrl: window.location.href }),
+    });
+    const data = await res.json();
+    if (!res.ok || !data.url) {
+      throw new Error(data.error || 'Could not create checkout session');
+    }
+    window.location.href = data.url;
+  } catch(e) {
+    errorEl.textContent = '⚠ ' + e.message;
+    errorEl.classList.add('visible');
+    btn.disabled = false;
+    btn.innerHTML = '<span class="lock-icon">🔒</span> Enroll now — ' + cfg.currency + cfg.price;
+  }
+}
+
+// Apply Tweaks
+function applyTweaks() {
+  cfg.courseName = document.getElementById('tw-name').value;
+  cfg.price = document.getElementById('tw-price').value;
+  cfg.originalPrice = document.getElementById('tw-orig').value;
+  cfg.currency = document.getElementById('tw-currency').value;
+  cfg.lsCheckoutUrl = document.getElementById('tw-checkout-url').value;
+  cfg.lsVariantId = document.getElementById('tw-variant-id').value;
+  cfg.successUrl = document.getElementById('tw-success').value;
+
+  document.querySelector('.pricing-product-name').textContent = cfg.courseName;
+  document.querySelector('.price-main').innerHTML = '<span class="price-currency">' + cfg.currency + '</span>' + cfg.price;
+  document.querySelector('.price-original').textContent = 'Regular price: ' + cfg.currency + cfg.originalPrice;
+  document.getElementById('checkout-btn').innerHTML = '<span class="lock-icon">🔒</span> Enroll now — ' + cfg.currency + cfg.price;
+
+  window.parent.postMessage({ type: '__edit_mode_set_keys', edits: {
+    courseName: cfg.courseName, price: cfg.price, originalPrice: cfg.originalPrice,
+    currency: cfg.currency, lsCheckoutUrl: cfg.lsCheckoutUrl, lsVariantId: cfg.lsVariantId, successUrl: cfg.successUrl
+  }}, '*');
+}
+
+function loadTweaks() {
+  document.getElementById('tw-name').value = cfg.courseName;
+  document.getElementById('tw-price').value = cfg.price;
+  document.getElementById('tw-orig').value = cfg.originalPrice;
+  document.getElementById('tw-currency').value = cfg.currency;
+  document.getElementById('tw-checkout-url').value = cfg.lsCheckoutUrl || '';
+  document.getElementById('tw-variant-id').value = cfg.lsVariantId || '';
+  document.getElementById('tw-success').value = cfg.successUrl || '';
+  applyTweaks();
+}
+loadTweaks();
+
+// Load product cover from backend
+(async () => {
+  try {
+    const res = await fetch('/api/product-cover');
+    if (!res.ok) return;
+    const { cover_url } = await res.json();
+    if (!cover_url) return;
+    const mockup = document.getElementById('hero-mockup');
+    mockup.innerHTML = `<img src="${cover_url}" alt="Product cover">`;
+    mockup.classList.add('has-cover');
+  } catch (_) {}
+})();
+
+window.addEventListener('message', (e) => {
+  if (e.data?.type === '__activate_edit_mode') document.getElementById('tweaks-panel').classList.add('open');
+  else if (e.data?.type === '__deactivate_edit_mode') document.getElementById('tweaks-panel').classList.remove('open');
+});
+window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+</script>
+</body>
+</html>
