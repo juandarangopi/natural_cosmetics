@@ -2,7 +2,7 @@ services:
   frontend:
     image: nginx:1.27-alpine
     ports:
-      - "8015:8015"
+      - "8033:8033"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
       - ./landing_cosmetica.html:/usr/share/nginx/html/landing_cosmetica.html:ro
@@ -15,7 +15,7 @@ services:
   backend:
     build: ./backend
     expose:
-      - "5015"
+      - "5033"
     env_file:
       - .env
     restart: unless-stopped
