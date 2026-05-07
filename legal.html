@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Legal — Natural Cosmetics</title>
+<link rel="icon" type="image/jpeg" href="favicon.jpeg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: oklch(97% 0.008 30);
+    --blush: oklch(92% 0.022 15);
+    --rose: oklch(33% 0.08 155);
+    --rose-mid: oklch(48% 0.08 155);
+    --rose-light: oklch(68% 0.07 150);
+    --gold: oklch(68% 0.12 58);
+    --gold-light: oklch(88% 0.07 58);
+    --warm-dark: oklch(18% 0.02 50);
+    --warm-mid: oklch(42% 0.02 50);
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--cream);
+    color: var(--warm-dark);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── Nav ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: oklch(97% 0.008 60 / 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid oklch(88% 0.02 30);
+    padding: 14px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 22px; font-weight: 600;
+    color: var(--rose); letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+  .nav-link {
+    font-size: 13px; color: var(--warm-mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-link:hover { color: var(--rose); }
+
+  /* ── Page hero ── */
+  .page-hero {
+    background: var(--rose);
+    padding: 56px 40px;
+    text-align: center;
+  }
+  .page-tag {
+    display: inline-block;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--gold-light); margin-bottom: 16px;
+  }
+  .page-title {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 400; line-height: 1.1;
+    color: white;
+  }
+  .page-title em { font-style: italic; color: var(--gold-light); }
+  .page-updated {
+    margin-top: 14px;
+    font-size: 13px;
+    color: oklch(85% 0.04 15);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── Layout ── */
+  .layout {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    max-width: 1160px;
+    margin: 0 auto;
+    width: 100%;
+    gap: 0;
+    padding: 0 40px;
+    align-items: start;
+  }
+
+  /* ── Sidebar ── */
+  .sidebar {
+    position: sticky;
+    top: 65px;
+    padding: 48px 32px 48px 0;
+    max-height: calc(100vh - 65px);
+    overflow-y: auto;
+  }
+  .sidebar-label {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 20px;
+    display: block;
+  }
+  .toc-section { margin-bottom: 28px; }
+  .toc-section-title {
+    font-family: var(--font-display);
+    font-size: 15px; font-weight: 600;
+    color: var(--warm-dark);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .toc-section-title a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.2s;
+  }
+  .toc-section-title a:hover { color: var(--rose); }
+  .toc-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-left: 12px;
+    border-left: 2px solid oklch(88% 0.02 30);
+  }
+  .toc-links li a {
+    font-size: 12px;
+    color: var(--warm-mid);
+    text-decoration: none;
+    transition: color 0.2s;
+    display: block;
+    padding: 2px 0;
+    line-height: 1.4;
+  }
+  .toc-links li a:hover { color: var(--rose); }
+  .toc-links li a.active {
+    color: var(--rose);
+    font-weight: 600;
+  }
+  .toc-divider {
+    height: 1px;
+    background: oklch(88% 0.02 30);
+    margin: 20px 0;
+  }
+
+  /* ── Main content ── */
+  .content {
+    padding: 56px 0 80px 48px;
+    border-left: 1px solid oklch(88% 0.02 30);
+  }
+
+  /* ── Document sections ── */
+  .doc-section {
+    margin-bottom: 80px;
+    scroll-margin-top: 80px;
+  }
+  .doc-section:last-child { margin-bottom: 0; }
+
+  .doc-header {
+    margin-bottom: 36px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid oklch(88% 0.02 30);
+  }
+  .doc-tag {
+    display: inline-block;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 10px;
+  }
+  .doc-title {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 400; line-height: 1.15;
+    color: var(--warm-dark);
+  }
+  .doc-title em { font-style: italic; color: var(--rose); }
+  .doc-updated {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--warm-mid);
+  }
+
+  .doc-intro {
+    font-size: 16px;
+    color: var(--warm-mid);
+    line-height: 1.8;
+    margin-bottom: 36px;
+    padding: 20px 24px;
+    background: var(--blush);
+    border-radius: 4px;
+    border-left: 3px solid var(--rose-light);
+  }
+
+  /* ── Numbered articles ── */
+  .article {
+    margin-bottom: 32px;
+    scroll-margin-top: 80px;
+  }
+  .article-heading {
+    font-family: var(--font-display);
+    font-size: 20px; font-weight: 600;
+    color: var(--warm-dark);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .article-num {
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+  .article-body {
+    font-size: 15px;
+    color: var(--warm-mid);
+    line-height: 1.8;
+  }
+  .article-body p { margin-bottom: 12px; }
+  .article-body p:last-child { margin-bottom: 0; }
+  .article-body ul {
+    margin: 10px 0 12px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .article-body ul li {
+    font-size: 15px;
+    color: var(--warm-mid);
+    line-height: 1.7;
+    list-style: none;
+    padding-left: 20px;
+    position: relative;
+  }
+  .article-body ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+  }
+
+  /* ── Contact box ── */
+  .contact-box {
+    background: white;
+    border: 1px solid oklch(88% 0.02 30);
+    border-radius: 6px;
+    padding: 24px 28px;
+    margin-top: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 4px 20px oklch(44% 0.13 10 / 0.05);
+  }
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: var(--warm-mid);
+  }
+  .contact-icon {
+    width: 32px; height: 32px;
+    background: var(--gold-light);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+
+  /* ── Section separator ── */
+  .section-sep {
+    height: 1px;
+    background: linear-gradient(to right, var(--rose-light), transparent);
+    margin-bottom: 80px;
+    opacity: 0.4;
+  }
+
+  /* ── Back to top ── */
+  .back-top {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--rose);
+    text-decoration: none;
+    transition: opacity 0.2s;
+    margin-top: 24px;
+  }
+  .back-top:hover { opacity: 0.7; }
+
+  /* ── Footer ── */
+  footer {
+    background: oklch(12% 0.02 30);
+    color: oklch(65% 0.02 30);
+    text-align: center;
+    padding: 28px 32px;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+  footer a { color: var(--rose-light); text-decoration: none; }
+
+  /* ── Responsive ── */
+  @media (max-width: 860px) {
+    nav { padding: 14px 20px; }
+    .layout {
+      grid-template-columns: 1fr;
+      padding: 0 20px;
+    }
+    .sidebar {
+      position: static;
+      max-height: none;
+      padding: 32px 0 0;
+      border-bottom: 1px solid oklch(88% 0.02 30);
+      margin-bottom: 32px;
+    }
+    .content {
+      padding: 32px 0 56px;
+      border-left: none;
+    }
+    .page-hero { padding: 40px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+  <a href="/" class="nav-logo">Natural Cosmetic</a>
+  <a href="/" class="nav-link">← Back to store</a>
+</nav>
+
+<!-- Page hero -->
+<div class="page-hero">
+  <span class="page-tag">✦ Legal Information</span>
+  <h1 class="page-title">Policies &amp; <em>Terms</em></h1>
+  <p class="page-updated">Last Updated: May 2026</p>
+</div>
+
+<!-- Main layout -->
+<div class="layout">
+
+  <!-- Sidebar / Table of contents -->
+  <aside class="sidebar">
+    <span class="sidebar-label">Contents</span>
+
+    <div class="toc-section">
+      <div class="toc-section-title"><a href="#terms">Terms &amp; Conditions</a></div>
+      <ul class="toc-links">
+        <li><a href="#terms-1">1. General Information</a></li>
+        <li><a href="#terms-2">2. Products</a></li>
+        <li><a href="#terms-3">3. Pricing</a></li>
+        <li><a href="#terms-4">4. Orders and Payments</a></li>
+        <li><a href="#terms-5">5. Shipping</a></li>
+        <li><a href="#terms-6">6. Proper Use of Products</a></li>
+        <li><a href="#terms-7">7. Intellectual Property</a></li>
+        <li><a href="#terms-8">8. Limitation of Liability</a></li>
+        <li><a href="#terms-9">9. Modifications</a></li>
+        <li><a href="#terms-10">10. Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="toc-divider"></div>
+
+    <div class="toc-section">
+      <div class="toc-section-title"><a href="#returns">Refund &amp; Return Policy</a></div>
+      <ul class="toc-links">
+        <li><a href="#returns-1">1. Return Request Period</a></li>
+        <li><a href="#returns-2">2. Conditions for Accepting Returns</a></li>
+        <li><a href="#returns-3">3. Damaged or Incorrect Products</a></li>
+        <li><a href="#returns-4">4. Refunds</a></li>
+        <li><a href="#returns-5">5. Shipping Costs</a></li>
+        <li><a href="#returns-6">6. Non-Refundable Products</a></li>
+        <li><a href="#returns-7">7. Order Cancellations</a></li>
+        <li><a href="#returns-8">8. Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="toc-divider"></div>
+
+    <div class="toc-section">
+      <div class="toc-section-title"><a href="#privacy">Privacy Policy</a></div>
+      <ul class="toc-links">
+        <li><a href="#privacy-1">1. Information We Collect</a></li>
+        <li><a href="#privacy-2">2. Use of Information</a></li>
+        <li><a href="#privacy-3">3. Data Protection</a></li>
+        <li><a href="#privacy-4">4. Sharing Information</a></li>
+        <li><a href="#privacy-5">5. Cookies</a></li>
+        <li><a href="#privacy-6">6. User Rights</a></li>
+        <li><a href="#privacy-7">7. Contact</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- Content -->
+  <main class="content">
+
+    <!-- ── Terms and Conditions ── -->
+    <section class="doc-section" id="terms">
+      <div class="doc-header">
+        <span class="doc-tag">Document 1 of 3</span>
+        <h2 class="doc-title">Terms and <em>Conditions</em></h2>
+        <p class="doc-updated">Last Updated: May 2026</p>
+      </div>
+
+      <p class="doc-intro">
+        Welcome to Natural Cosmetics. By accessing and using this website, you agree to these Terms and Conditions. If you do not agree with any part of these terms, please do not use our website.
+      </p>
+
+      <div class="article" id="terms-1">
+        <div class="article-heading">
+          <span class="article-num">01</span>
+          General Information
+        </div>
+        <div class="article-body">
+          <p>Natural Cosmetics is an online store dedicated to selling cosmetic and personal care products.</p>
+          <p>By placing an order on this website, the customer confirms that they are of legal age or have authorization from their legal guardians.</p>
+        </div>
+      </div>
+
+      <div class="article" id="terms-2">
+        <div class="article-heading">
+          <span class="article-num">02</span>
+          Products
+        </div>
+        <div class="article-body">
+          <p>All products are presented as accurately as possible. However, colors, packaging, or visual details may vary slightly depending on the device used to view the website or manufacturer updates.</p>
+          <p>Results obtained from cosmetic products may vary depending on each individual, skin type, and usage.</p>
+        </div>
+      </div>
+
+      <div class="article" id="terms-3">
+        <div class="article-heading">
+          <span class="article-num">03</span>
+          Pricing
+        </div>
+        <div class="article-body">
+          <p>All prices displayed on the website are shown in the applicable currency and include relevant taxes unless otherwise stated.</p>
+          <p>Natural Cosmetics reserves the right to modify prices, promotions, and product availability at any time without prior notice.</p>
+        </div>
+      </div>
+
+      <div class="article" id="terms-4">
+        <div class="article-heading">
+          <span class="article-num">04</span>
+          Orders and Payments
+        </div>
+        <div class="article-body">
+          <p>Once an order is placed, the customer will receive a confirmation email or message.</p>
+          <p>We reserve the right to cancel orders in cases of:</p>
+          <ul>
+            <li>Suspected fraud.</li>
+            <li>Incorrect or incomplete shipping information.</li>
+            <li>Inventory issues.</li>
+            <li>Obvious pricing or description errors.</li>
+          </ul>
+          <p>Payments are processed through secure third-party payment platforms.</p>
+        </div>
+      </div>
+
+      <div class="article" id="terms-5">
+        <div class="article-heading">
+          <span class="article-num">05</span>
+          Shipping
+        </div>
+        <div class="article-body">
+          <p>Delivery times are estimated and may vary depending on the customer's location, shipping carrier, and external factors.</p>
+          <p>Natural Cosmetics is not responsible for delays caused by third parties, weather conditions, logistical issues, or circumstances beyond our control.</p>
+          <p>It is the customer's responsibility to provide accurate shipping information.</p>
+        </div>
+      </div>
+
+      <div class="article" id="terms-6">
+        <div class="article-heading">
+          <span class="article-num">06</span>
+          Proper Use of Products
+        </div>
+        <div class="article-body">
+          <p>Our products are intended for external use only.</p>
+          <p>Before using any cosmetic product, we recommend performing a patch test.</p>
+          <p>Discontinue use if irritation occurs and consult a healthcare professional if necessary.</p>
+        </div>
+      </div>
+
+      <div class="article" id="terms-7">
+        <div class="article-heading">
+          <span class="article-num">07</span>
+          Intellectual Property
+        </div>
+        <div class="article-body">
+          <p>All website content, including images, text, logos, designs, and graphics, belongs to Natural Cosmetics and may not be used, reproduced, or distributed without prior authorization.</p>
+        </div>
+      </div>
+
+      <div class="article" id="terms-8">
+        <div class="article-heading">
+          <span class="article-num">08</span>
+          Limitation of Liability
+        </div>
+        <div class="article-body">
+          <p>Natural Cosmetics shall not be held responsible for indirect, incidental, or consequential damages arising from the use or inability to use the products or website.</p>
+        </div>
+      </div>
+
+      <div class="article" id="terms-9">
+        <div class="article-heading">
+          <span class="article-num">09</span>
+          Modifications
+        </div>
+        <div class="article-body">
+          <p>We reserve the right to update or modify these Terms and Conditions at any time.</p>
+        </div>
+      </div>
+
+      <div class="article" id="terms-10">
+        <div class="article-heading">
+          <span class="article-num">10</span>
+          Contact
+        </div>
+        <div class="article-body">
+          <p>If you have any questions regarding these Terms and Conditions, you may contact us through:</p>
+          <div class="contact-box">
+            <div class="contact-item">
+              <span class="contact-icon">✉</span>
+              <span>porpiucompany@gmail.com</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a href="#" class="back-top">↑ Back to top</a>
+    </section>
+
+    <div class="section-sep"></div>
+
+    <!-- ── Refund and Return Policy ── -->
+    <section class="doc-section" id="returns">
+      <div class="doc-header">
+        <span class="doc-tag">Document 2 of 3</span>
+        <h2 class="doc-title">Refund &amp; Return <em>Policy</em></h2>
+        <p class="doc-updated">Last Updated: May 2026</p>
+      </div>
+
+      <p class="doc-intro">
+        At Natural Cosmetics, we want to ensure customer satisfaction. If you are not satisfied with your purchase, you may request a return under the following conditions.
+      </p>
+
+      <div class="article" id="returns-1">
+        <div class="article-heading">
+          <span class="article-num">01</span>
+          Return Request Period
+        </div>
+        <div class="article-body">
+          <p>Customers may request a return within the first <strong>7 calendar days</strong> after receiving the order.</p>
+        </div>
+      </div>
+
+      <div class="article" id="returns-2">
+        <div class="article-heading">
+          <span class="article-num">02</span>
+          Conditions for Accepting Returns
+        </div>
+        <div class="article-body">
+          <p>To be eligible for a return:</p>
+          <ul>
+            <li>The product must be unused.</li>
+            <li>The product must be in its original packaging.</li>
+            <li>The product must not show signs of damage, alteration, or improper handling.</li>
+            <li>All original accessories or included items must be returned.</li>
+          </ul>
+          <p>For hygiene and safety reasons, we do not accept returns of opened or used cosmetic products.</p>
+        </div>
+      </div>
+
+      <div class="article" id="returns-3">
+        <div class="article-heading">
+          <span class="article-num">03</span>
+          Damaged or Incorrect Products
+        </div>
+        <div class="article-body">
+          <p>If you received a defective, damaged, or incorrect product, please contact us within the first <strong>48 hours</strong> after delivery.</p>
+          <p>You will need to provide:</p>
+          <ul>
+            <li>Order number.</li>
+            <li>Photos of the product.</li>
+            <li>Description of the issue.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="article" id="returns-4">
+        <div class="article-heading">
+          <span class="article-num">04</span>
+          Refunds
+        </div>
+        <div class="article-body">
+          <p>Once the return is approved, the refund will be processed using the same payment method used for the purchase.</p>
+          <p>Processing times may vary depending on the bank or payment platform.</p>
+        </div>
+      </div>
+
+      <div class="article" id="returns-5">
+        <div class="article-heading">
+          <span class="article-num">05</span>
+          Shipping Costs
+        </div>
+        <div class="article-body">
+          <p>Shipping costs are non-refundable unless the error was caused by Natural Cosmetics.</p>
+        </div>
+      </div>
+
+      <div class="article" id="returns-6">
+        <div class="article-heading">
+          <span class="article-num">06</span>
+          Non-Refundable Products
+        </div>
+        <div class="article-body">
+          <p>Returns or refunds are not accepted for:</p>
+          <ul>
+            <li>Opened or used products.</li>
+            <li>Products purchased during special promotions or discounts.</li>
+            <li>Products damaged due to misuse.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="article" id="returns-7">
+        <div class="article-heading">
+          <span class="article-num">07</span>
+          Order Cancellations
+        </div>
+        <div class="article-body">
+          <p>Orders may only be canceled before they are shipped.</p>
+          <p>Once the order has been dispatched, it must be processed as a return.</p>
+        </div>
+      </div>
+
+      <div class="article" id="returns-8">
+        <div class="article-heading">
+          <span class="article-num">08</span>
+          Contact
+        </div>
+        <div class="article-body">
+          <p>For requests related to returns and refunds:</p>
+          <div class="contact-box">
+            <div class="contact-item">
+              <span class="contact-icon">✉</span>
+              <span>porpiucompany@gmail.com</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a href="#" class="back-top">↑ Back to top</a>
+    </section>
+
+    <div class="section-sep"></div>
+
+    <!-- ── Privacy Policy ── -->
+    <section class="doc-section" id="privacy">
+      <div class="doc-header">
+        <span class="doc-tag">Document 3 of 3</span>
+        <h2 class="doc-title">Privacy <em>Policy</em></h2>
+        <p class="doc-updated">Last Updated: May 2026</p>
+      </div>
+
+      <p class="doc-intro">
+        At Natural Cosmetics, we respect your privacy and protect the personal information you share with us.
+      </p>
+
+      <div class="article" id="privacy-1">
+        <div class="article-heading">
+          <span class="article-num">01</span>
+          Information We Collect
+        </div>
+        <div class="article-body">
+          <p>We may collect:</p>
+          <ul>
+            <li>Full name.</li>
+            <li>Shipping address.</li>
+            <li>Email address.</li>
+            <li>Phone number.</li>
+            <li>Payment information.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="article" id="privacy-2">
+        <div class="article-heading">
+          <span class="article-num">02</span>
+          Use of Information
+        </div>
+        <div class="article-body">
+          <p>The information collected is used to:</p>
+          <ul>
+            <li>Process orders.</li>
+            <li>Manage shipments.</li>
+            <li>Provide customer support.</li>
+            <li>Send updates and promotional content.</li>
+            <li>Improve our services.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="article" id="privacy-3">
+        <div class="article-heading">
+          <span class="article-num">03</span>
+          Data Protection
+        </div>
+        <div class="article-body">
+          <p>We implement reasonable security measures to protect users' personal information.</p>
+        </div>
+      </div>
+
+      <div class="article" id="privacy-4">
+        <div class="article-heading">
+          <span class="article-num">04</span>
+          Sharing Information
+        </div>
+        <div class="article-body">
+          <p>We do not sell or share personal information with third parties except when necessary to process payments, fulfill deliveries, or comply with legal obligations.</p>
+        </div>
+      </div>
+
+      <div class="article" id="privacy-5">
+        <div class="article-heading">
+          <span class="article-num">05</span>
+          Cookies
+        </div>
+        <div class="article-body">
+          <p>Our website may use cookies to improve the user experience and analyze browsing behavior.</p>
+        </div>
+      </div>
+
+      <div class="article" id="privacy-6">
+        <div class="article-heading">
+          <span class="article-num">06</span>
+          User Rights
+        </div>
+        <div class="article-body">
+          <p>Users may request updates, modifications, or deletion of their personal data by contacting us directly.</p>
+        </div>
+      </div>
+
+      <div class="article" id="privacy-7">
+        <div class="article-heading">
+          <span class="article-num">07</span>
+          Contact
+        </div>
+        <div class="article-body">
+          <p>For questions related to privacy and data protection:</p>
+          <div class="contact-box">
+            <div class="contact-item">
+              <span class="contact-icon">✉</span>
+              <span>porpiucompany@gmail.com</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a href="#" class="back-top">↑ Back to top</a>
+    </section>
+
+  </main>
+</div>
+
+<!-- Footer -->
+<footer>
+  <p>© 2026 Natural Cosmetic · <a href="legal.html">Privacy Policy</a> · <a href="legal.html">Terms</a> · <a href="mailto:porpiucompany@gmail.com">Support</a></p>
+</footer>
+
+<script>
+  // Highlight active TOC link on scroll
+  const allArticles = document.querySelectorAll('.article[id], .doc-section[id]');
+  const allTocLinks = document.querySelectorAll('.toc-links li a');
+
+  function onScroll() {
+    let current = '';
+    allArticles.forEach(el => {
+      const top = el.getBoundingClientRect().top;
+      if (top <= 120) current = el.id;
+    });
+    allTocLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+</script>
+
+</body>
+</html>

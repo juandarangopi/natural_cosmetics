@@ -7,6 +7,7 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
       - ./landing_cosmetica.html:/usr/share/nginx/html/landing_cosmetica.html:ro
       - ./ebook_download.html:/usr/share/nginx/html/ebook_download.html:ro
+      - ./legal.html:/usr/share/nginx/html/legal.html:ro
       - ./favicon.jpeg:/usr/share/nginx/html/favicon.jpeg:ro
       - ./uploads:/usr/share/nginx/html/uploads:ro
     depends_on:
