@@ -58,13 +58,41 @@ def get_products():
 
 @app.route("/product-cover", methods=["GET"])
 def get_product_cover():
-    if not LS_API_KEY or not LS_STORE_ID:
-        return jsonify({"error": "Lemon Squeezy credentials not configured"}), 500
+    if not LS_API_KEY:
+        return jsonify({"error": "Lemon Squeezy API key not configured"}), 500
 
     headers = {
         "Authorization": f"Bearer {LS_API_KEY}",
         "Accept": "application/vnd.api+json",
     }
+
+    # Prefer variant ID (always correct) over store ID filter
+    if LS_VARIANT_ID:
+        try:
+            resp = httpx.get(
+                f"{LS_API_BASE}/variants/{LS_VARIANT_ID}",
+                params={"include": "product"},
+                headers=headers,
+                timeout=10,
+            )
+            resp.raise_for_status()
+            data = resp.json()
+            included = data.get("included", [])
+            product = next((item for item in included if item.get("type") == "products"), None)
+            if product:
+                attrs = product["attributes"]
+                return jsonify({
+                    "name": attrs.get("name"),
+                    "cover_url": attrs.get("large_thumb_url") or attrs.get("thumb_url"),
+                })
+        except httpx.HTTPStatusError as e:
+            return jsonify({"error": f"Lemon Squeezy error: {e.response.text}"}), 502
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
+
+    # Fallback: filter by store_id
+    if not LS_STORE_ID:
+        return jsonify({"error": "Configure LS_VARIANT_ID or LEMONSQUEEZY_STORE_ID"}), 500
 
     try:
         resp = httpx.get(
