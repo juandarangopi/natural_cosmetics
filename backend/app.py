@@ -178,9 +178,84 @@ def verify_license():
         return jsonify({"valid": False, "error": "Error al verificar la licencia"}), 500
 
 
+def _validate_license_get_variant(license_key):
+    """Validate a license key and return variant_id, or raise on failure."""
+    resp = httpx.post(
+        LS_LICENSE_API,
+        data={"license_key": license_key},
+        headers={"Accept": "application/json"},
+        timeout=10,
+    )
+    ls_data = resp.json()
+    if not ls_data.get("valid"):
+        return None, ls_data.get("error") or "Licencia inválida"
+    variant_id = ls_data.get("meta", {}).get("variant_id")
+    return variant_id, None
+
+
+def _fetch_variant_files(variant_id):
+    """Return the list of file objects for a variant from Lemon Squeezy."""
+    ls_headers = {
+        "Authorization": f"Bearer {LS_API_KEY}",
+        "Accept": "application/vnd.api+json",
+    }
+    files_resp = httpx.get(
+        f"{LS_API_BASE}/files",
+        params={"filter[variant_id]": variant_id},
+        headers=ls_headers,
+        timeout=15,
+    )
+    files_resp.raise_for_status()
+    return files_resp.json().get("data", [])
+
+
+@app.route("/ebook-files", methods=["GET"])
+def list_ebook_files():
+    """Return metadata for all downloadable files associated with a license."""
+    license_key = request.args.get("license_key", "").strip()
+
+    if not license_key:
+        return jsonify({"error": "Se requiere una clave de licencia"}), 400
+    if not LS_API_KEY:
+        return jsonify({"error": "API key no configurada en el servidor"}), 500
+
+    try:
+        variant_id, err = _validate_license_get_variant(license_key)
+    except httpx.TimeoutException:
+        return jsonify({"error": "Tiempo de espera agotado, intenta de nuevo"}), 504
+    except Exception:
+        return jsonify({"error": "Error al verificar la licencia"}), 500
+
+    if err:
+        return jsonify({"error": err}), 403
+    if not variant_id:
+        return jsonify({"error": "No se pudo determinar el producto asociado"}), 500
+
+    try:
+        files = _fetch_variant_files(variant_id)
+    except httpx.HTTPStatusError as e:
+        return jsonify({"error": f"Error al obtener los archivos: {e.response.status_code}"}), 502
+    except Exception:
+        return jsonify({"error": "Error al obtener los archivos"}), 500
+
+    if not files:
+        return jsonify({"error": "No hay archivos disponibles para este producto"}), 404
+
+    file_list = [
+        {
+            "id": f["id"],
+            "name": f["attributes"].get("name", f"Ebook {i + 1}"),
+            "size": f["attributes"].get("size"),
+        }
+        for i, f in enumerate(files)
+    ]
+    return jsonify({"files": file_list})
+
+
 @app.route("/download-ebook", methods=["GET"])
 def download_ebook():
     license_key = request.args.get("license_key", "").strip()
+    file_id = request.args.get("file_id", "").strip()
 
     if not license_key:
         return jsonify({"error": "Se requiere una clave de licencia"}), 400
@@ -190,46 +265,43 @@ def download_ebook():
 
     # Step 1: Validate license and extract variant_id
     try:
-        resp = httpx.post(
-            LS_LICENSE_API,
-            data={"license_key": license_key},
-            headers={"Accept": "application/json"},
-            timeout=10,
-        )
-        ls_data = resp.json()
-        if not ls_data.get("valid"):
-            return jsonify({"error": "Licencia inválida"}), 403
-        variant_id = ls_data.get("meta", {}).get("variant_id")
+        variant_id, err = _validate_license_get_variant(license_key)
     except httpx.TimeoutException:
         return jsonify({"error": "Tiempo de espera agotado, intenta de nuevo"}), 504
     except Exception:
         return jsonify({"error": "Error al verificar la licencia"}), 500
 
+    if err:
+        return jsonify({"error": err}), 403
     if not variant_id:
         return jsonify({"error": "No se pudo determinar el producto asociado"}), 500
 
     # Step 2: Fetch files for this variant from Lemon Squeezy
-    ls_headers = {
-        "Authorization": f"Bearer {LS_API_KEY}",
-        "Accept": "application/vnd.api+json",
-    }
     try:
-        files_resp = httpx.get(
-            f"{LS_API_BASE}/files",
-            params={"filter[variant_id]": variant_id},
-            headers=ls_headers,
-            timeout=15,
-        )
-        files_resp.raise_for_status()
-        files = files_resp.json().get("data", [])
-        if not files:
-            return jsonify({"error": "No hay archivos disponibles para este producto"}), 404
-        file_attrs = files[0]["attributes"]
-        download_url = file_attrs.get("download_url")
+        files = _fetch_variant_files(variant_id)
     except httpx.HTTPStatusError as e:
         return jsonify({"error": f"Error al obtener el archivo de Lemon Squeezy: {e.response.status_code}"}), 502
     except Exception:
         return jsonify({"error": "Error al obtener el archivo"}), 500
+
+    if not files:
+        return jsonify({"error": "No hay archivos disponibles para este producto"}), 404
+
+    # Select the requested file by id, by index, or fall back to the first one
+    file_index_raw = request.args.get("file_index", "").strip()
+    if file_id:
+        file_data = next((f for f in files if str(f["id"]) == file_id), None)
+        if not file_data:
+            return jsonify({"error": "Archivo no encontrado"}), 404
+    elif file_index_raw.isdigit():
+        idx = int(file_index_raw)
+        if idx >= len(files):
+            return jsonify({"error": "Índice de archivo fuera de rango"}), 404
+        file_data = files[idx]
+    else:
+        file_data = files[0]
+
+    download_url = file_data["attributes"].get("download_url")
 
     if not download_url:
         return jsonify({"error": "URL de descarga no disponible"}), 503
