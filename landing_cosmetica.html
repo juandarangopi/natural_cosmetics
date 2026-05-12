@@ -573,7 +573,7 @@
 
 <!-- Announcement -->
 <div class="announcement">
-  ⏳ Limited-time special offer — <span>90% off</span> — Ends in <span id="countdown-timer">11:23:00</span>
+  ⏳ Limited-time special offer — <span>90% off</span> — Ends in <span id="countdown-timer">02:23:00</span>
 </div>
 
 <script>
@@ -581,7 +581,7 @@
   var stored = localStorage.getItem('countdownEnd');
   var endTime = stored ? parseInt(stored, 10) : null;
   if (!endTime || endTime <= Date.now()) {
-    endTime = Date.now() + ((11 * 60 + 23) * 60 * 1000);
+    endTime = Date.now() + ((2 * 60 + 23) * 60 * 1000);
     localStorage.setItem('countdownEnd', endTime);
   }
 
