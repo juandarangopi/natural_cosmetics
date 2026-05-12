@@ -187,6 +187,10 @@
     font-family: var(--font-display);
     font-size: 28px; font-weight: 600; line-height: 1;
   }
+  .badge-decimal {
+    font-size: 0.55em; font-weight: 600;
+    vertical-align: top; margin-top: 2px; display: inline-block;
+  }
   .badge-label { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; }
   .reveal {
     opacity: 0; transform: translateY(28px);
@@ -416,6 +420,10 @@
     font-size: 72px; font-weight: 600;
     color: var(--warm-dark); line-height: 1;
   }
+  .price-decimal {
+    font-size: 0.45em; font-weight: 600;
+    vertical-align: top; margin-top: 6px; display: inline-block;
+  }
   .price-currency {
     font-family: var(--font-display);
     font-size: 32px; vertical-align: top;
@@ -565,8 +573,35 @@
 
 <!-- Announcement -->
 <div class="announcement">
-  ⏳ Limited-time special offer — <span>50% off</span> — Only a few hours left
+  ⏳ Limited-time special offer — <span>90% off</span> — Ends in <span id="countdown-timer">11:23:00</span>
 </div>
+
+<script>
+(function() {
+  var stored = localStorage.getItem('countdownEnd');
+  var endTime = stored ? parseInt(stored, 10) : null;
+  if (!endTime || endTime <= Date.now()) {
+    endTime = Date.now() + ((11 * 60 + 23) * 60 * 1000);
+    localStorage.setItem('countdownEnd', endTime);
+  }
+
+  function updateCountdown() {
+    var remaining = endTime - Date.now();
+    if (remaining <= 0) {
+      document.getElementById('countdown-timer').textContent = '00:00:00';
+      return;
+    }
+    var h = Math.floor(remaining / 3600000);
+    var m = Math.floor((remaining % 3600000) / 60000);
+    var s = Math.floor((remaining % 60000) / 1000);
+    document.getElementById('countdown-timer').textContent =
+      String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+    setTimeout(updateCountdown, 1000);
+  }
+
+  updateCountdown();
+})();
+</script>
 
 <!-- Nav -->
 <nav>
@@ -603,8 +638,51 @@
         <!-- <img src="uploads/portrait.png" alt="Portrait photo" style="width:100%;height:100%;object-fit:cover;border-radius:6px;display:block;"> -->
       </div>
       <div class="hero-badge">
-        <div class="badge-price">$10</div>
+        <div class="badge-price">$4<span class="badge-decimal">.30</span></div>
         <div class="badge-label">One-Time Payment</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing + lq -->
+<section class="pricing-bg" id="pricing">
+  <div class="container" style="text-align:center">
+    <span class="section-tag">Investment</span>
+    <h2 class="section-title reveal">Pay once, access it<br><em>for life</em></h2>
+    <div class="pricing-box reveal">
+      <div class="pricing-header">
+        <div class="pricing-product-name">Natural Cosmetics Complete Bundle</div>
+        <div class="pricing-subtitle">Get Instant Access </div>
+      </div>
+      <div class="pricing-body">
+        <div class="price-display">
+          <div class="price-original">Regular price: $43</div>
+          <div class="price-main"><span class="price-currency">$</span>4<span class="price-decimal">.30</span></div>
+          <div class="price-period">One-time payment — lifetime access</div>
+        </div>
+        <ul class="pricing-includes">
+          <li><span class="pi-check">✓</span> Natural Cosmetics Digital Guide (+40 recipes)</li>
+          <li><span class="pi-check">✓</span> Natural Makeup Digital Guide (Professional formulas)</li>
+          <li><span class="pi-check">✓</span> FREE BONUS: Trending Recipes eBook</li>
+          <li><span class="pi-check">✓</span> Downloadable PDF materials</li>
+          <li><span class="pi-check">✓</span> One-time payment. Lifetime access.</li>
+          <li><span class="pi-check">✓</span> 7-day money-back guarantee</li>
+        </ul>
+
+        <button class="lq-btn" id="checkout-btn" onclick="initiateCheckout()">
+          <span class="lock-icon">🔒</span>
+          Enroll now — $4.30
+        </button>
+
+        <div class="lq-error" id="lq-error"></div>
+
+        <div class="lq-secure">
+          <svg width="12" height="14" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 0L0.5 2.5V6.5C0.5 9.5 2.9 12.3 6 13C9.1 12.3 11.5 9.5 11.5 6.5V2.5L6 0Z" fill="oklch(72% 0.10 55)"/>
+          </svg>
+          100% secure payment powered by Lemon Squeezy
+        </div>
       </div>
     </div>
   </div>
@@ -823,48 +901,6 @@
   </div>
 </section>
 
-<!-- Pricing + lq -->
-<section class="pricing-bg" id="pricing">
-  <div class="container" style="text-align:center">
-    <span class="section-tag">Investment</span>
-    <h2 class="section-title reveal">Pay once, access it<br><em>for life</em></h2>
-    <div class="pricing-box reveal">
-      <div class="pricing-header">
-        <div class="pricing-product-name">Natural Cosmetics Complete Bundle</div>
-        <div class="pricing-subtitle">Get Instant Access </div>
-      </div>
-      <div class="pricing-body">
-        <div class="price-display">
-          <div class="price-original">Regular price: $30</div>
-          <div class="price-main"><span class="price-currency">$</span>10</div>
-          <div class="price-period">One-time payment — lifetime access</div>
-        </div>
-        <ul class="pricing-includes">
-          <li><span class="pi-check">✓</span> Natural Cosmetics Digital Guide (+40 recipes)</li>
-          <li><span class="pi-check">✓</span> Natural Makeup Digital Guide (Professional formulas)</li>
-          <li><span class="pi-check">✓</span> FREE BONUS: Trending Recipes eBook</li>
-          <li><span class="pi-check">✓</span> Downloadable PDF materials</li>
-          <li><span class="pi-check">✓</span> One-time payment. Lifetime access.</li>
-          <li><span class="pi-check">✓</span> 7-day money-back guarantee</li>
-        </ul>
-
-        <button class="lq-btn" id="checkout-btn" onclick="initiateCheckout()">
-          <span class="lock-icon">🔒</span>
-          Enroll now — $97
-        </button>
-
-        <div class="lq-error" id="lq-error"></div>
-
-        <div class="lq-secure">
-          <svg width="12" height="14" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M6 0L0.5 2.5V6.5C0.5 9.5 2.9 12.3 6 13C9.1 12.3 11.5 9.5 11.5 6.5V2.5L6 0Z" fill="oklch(72% 0.10 55)"/>
-          </svg>
-          100% secure payment powered by Lemon Squeezy
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- FAQ -->
 <section>
@@ -971,8 +1007,8 @@
 <script>
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "courseName": "Natural Cosmetics",
-  "price": "10",
-  "originalPrice": "30",
+  "price": "4.30",
+  "originalPrice": "43",
   "currency": "$",
   "lsCheckoutUrl": "",
   "lsVariantId": "",
@@ -1055,7 +1091,11 @@ function applyTweaks() {
   cfg.successUrl = document.getElementById('tw-success').value;
 
   document.querySelector('.pricing-product-name').textContent = cfg.courseName;
-  document.querySelector('.price-main').innerHTML = '<span class="price-currency">' + cfg.currency + '</span>' + cfg.price;
+  var priceParts = cfg.price.split('.');
+  var priceFormatted = priceParts.length > 1
+    ? priceParts[0] + '<span class="price-decimal">.' + priceParts[1] + '</span>'
+    : cfg.price;
+  document.querySelector('.price-main').innerHTML = '<span class="price-currency">' + cfg.currency + '</span>' + priceFormatted;
   document.querySelector('.price-original').textContent = 'Regular price: ' + cfg.currency + cfg.originalPrice;
   document.getElementById('checkout-btn').innerHTML = '<span class="lock-icon">🔒</span> Enroll now — ' + cfg.currency + cfg.price;
 
